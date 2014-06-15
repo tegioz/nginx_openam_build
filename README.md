@@ -3,7 +3,7 @@ Nginx OpenAM policy agent build
 
 An easy way of building Nginx with hamano's OpenAM policy agent module (+ other nginx modules) using Docker
 
-Nginx openam module (thanks for it hamano! -https://bitbucket.org/hamano/nginx-mod-am-) is an OpenAM policy agent for Nginx. With every release of the module, a new Nginx binary is released with the module embedded. This is great and is the way to go if you don't need any extra modules in Nginx (you can get them here: http://bugster.forgerock.org/jira/browse/OPENAM-1182). However, if you need to add any other module, you'll find that building the policy agent isn't a funny task to do (dependencies, platform specific tweaks, versions, etc). This is an attempt of making the process straightforward using Docker containers.
+Nginx openam module (thanks for it hamano! -https://bitbucket.org/hamano/nginx-mod-am-) is an OpenAM policy agent for Nginx. With every release of the module, a new Nginx binary is released with the module embedded. This is great and is the way to go if you don't need any extra modules in Nginx (you can get it here: http://bugster.forgerock.org/jira/browse/OPENAM-1182). However, if you need to add any other module, you'll find that building the policy agent isn't a funny task to do (dependencies, platform specific tweaks, versions, etc). This is an attempt of making the process straightforward using Docker containers.
 
 ### Dependencies
 
@@ -34,7 +34,7 @@ In the Docker file there is a section identified by this header (EXTRA NGINX MOD
 
 ### Playing with the nginx_openam_build Docker image
 
-If you don't want to play with the Dockerfile you can create a container using the image you just built and open an interactive bash session. This way you'll have a full environment with everything you need to build the policy agent again, adding now some extra modules you might be interested in (/tmp/opensso/products/webagents/agents/source/nginx/Makefile is a good place to look at in this case).
+If you prefer not modifying the Dockerfile you can create a container using the image you just built and open an interactive bash session. This way you'll have a full environment with everything you need to build the policy agent again, adding now some extra modules you might be interested in (/tmp/opensso/products/webagents/agents/source/nginx/Makefile is a good place to look at in this case).
 
 To create a container based on the image previously built and open an interactive session just run this command:
 
