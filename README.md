@@ -1,7 +1,7 @@
 Nginx OpenAM policy agent build
 ===
 
-Nginx openam module (thanks for it hamano! -https://bitbucket.org/hamano/nginx-mod-am-) is an OpenAM policy agent for Nginx. With every release of the module, a new Nginx binary is released with the module embedded. This is great and is the way to go if you don't need any extra modules in Nginx (you can get it here: http://bugster.forgerock.org/jira/browse/OPENAM-1182). However, if you need to add any other module, you'll find that building the policy agent isn't a funny task to do (dependencies, platform specific tweaks, versions, etc). This is an attempt of making the process straightforward using Docker containers.
+Nginx openam module (thanks for it hamano! https://bitbucket.org/hamano/nginx-mod-am) is an OpenAM policy agent for Nginx. With every release of the module, a new Nginx binary is released with the module embedded. This is great and is the way to go if you don't need any extra modules in Nginx (you can get it here: http://bugster.forgerock.org/jira/browse/OPENAM-1182). However, if you need to add any other module, you'll find that building the policy agent isn't a funny task to do (dependencies, platform specific tweaks, versions, etc). This is an attempt of making the process straightforward using Docker containers.
 
 ### Dependencies
 
