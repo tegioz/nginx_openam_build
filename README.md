@@ -26,6 +26,10 @@ The build process will take some time, please be patient :)
 
 That's it!
 
+### How to use the policy agent
+
+More information: https://bitbucket.org/hamano/nginx-mod-am
+
 ### Want to add more Nginx modules? 
 
 In the Docker file there is a section identified by this header (EXTRA NGINX MODULES TO ADD) in which an extra sample module (redis2-nginx-module) is added to the Nginx build. You can use it as an example to add as many as you want.
