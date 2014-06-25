@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM centos:centos6
 MAINTAINER Sergio Castano Arteaga "sergio.castano.arteaga@gmail.com"
 
 # Nginx version
@@ -9,24 +9,29 @@ ENV NGINX_VERSION 1.4.7
 ENV FORGEROCK_USERNAME your_username_here
 ENV FORGEROCK_PASSWORD your_password_here
 
-# Update package index and install some packages we'll need
-RUN apt-get update && \
-    apt-get -y install unzip \
+# Install some packages we will need
+RUN yum -y install yum-utils \
+        tar \
+        file \
+        patch \
+        gcc \
+        gcc-c++ \
+        unzip \
         wget \
         git \
         subversion \
-        build-essential \
         ant \
-        openjdk-7-jdk \
-        zlib1g-dev \
-        libnspr4-dev \
-        libnss3-dev \
-        python-dev
+        zlib-devel \
+        nspr-devel \
+        nss-devel \
+        python-devel \
+        lua-devel
 
-# Checkout OpenAM webagents from incubator branch
+# Checkout OpenAM source code (from incubator branch)
 RUN cd /tmp && \
     svn co \
         --trust-server-cert \
+        --non-interactive \
         --username $FORGEROCK_USERNAME \
         --password $FORGEROCK_PASSWORD \
         https://svn.forgerock.org/openam/branches/incubator/opensso/
@@ -53,9 +58,6 @@ RUN cd /tmp && \
     ./configure && \
     make && \
     mv .libs lib
-
-# Symlink make to gmake
-RUN ln -s /usr/bin/make /usr/bin/gmake
 
 # Update paths in webagents Makefile
 RUN sed -i "/libxml2/c\CFLAGS += -I/tmp/libxml2/include -I/tmp/pcre" \
@@ -107,9 +109,9 @@ RUN sed -i "/with-openssl/i\\\t\\t--add-module=\/tmp\/redis2-nginx-module \\\\" 
 RUN cd /tmp/opensso/products/webagents && ant nginx -Dbuild.type=64
 
 # Check that everything went ok listing nginx compilation flags
-RUN cd /lib/x86_64-linux-gnu/ && \
-    ln -s libpcre.so.3 libpcre.so.1 && \
-    /tmp/opensso/products/webagents/built/nginx/scratch/web_agents/nginx_agent/bin/nginx -V
+RUN cd /lib64 && \
+    ln -s libpcre.so.0 libpcre.so.1 && \
+    /tmp/opensso/products/webagents/agents/source/nginx/build/objs/nginx -V
 
 
 CMD ["cat", "/tmp/opensso/products/webagents/built/dist/nginx_Linux_64_agent_4.0.0-SNAPSHOT.zip"]
